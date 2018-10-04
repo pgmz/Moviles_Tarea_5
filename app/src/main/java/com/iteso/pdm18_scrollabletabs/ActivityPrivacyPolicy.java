@@ -19,16 +19,25 @@ public class ActivityPrivacyPolicy extends AppCompatActivity implements DialogIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_privacy_policy);
 
+        //get webView and load the privacyPolicy file
         webView = findViewById(R.id.activity_privacy_policy_web_view);
         webView.loadUrl("file:///android_asset/PrivacyPolicy.html");
+
+        //enable javascript at web settings
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
+        //let web settings know which interface to use, and name it Android, as html PrivacyPolicy need its
+        //to be named Android
         webView.addJavascriptInterface(new WebInterface(this), "Android");
+
+        //add a web client
         webView.setWebViewClient(new MyWebViewClient());
     }
 
     @Override
     public boolean onKeyDown(int i, KeyEvent keyEvent) {
+        //listen when KEYCODE_BACK is pressed, and override stack movement of applications
         if((i == KeyEvent.KEYCODE_BACK) && webView.canGoBack()){
             webView.goBack();
             return true;
@@ -41,6 +50,7 @@ public class ActivityPrivacyPolicy extends AppCompatActivity implements DialogIn
         return false;
     }
 
+    //This interface is used to prevent app to call other intent manage web view......
     public class MyWebViewClient extends WebViewClient{
 
         @Override

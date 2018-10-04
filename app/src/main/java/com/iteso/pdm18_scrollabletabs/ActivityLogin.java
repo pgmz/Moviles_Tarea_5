@@ -33,8 +33,10 @@ public class ActivityLogin extends AppCompatActivity {
 
     private void setLoggedUserToPreferences(String user_name, String user_password) {
 
+        //get preferences and preferences editor
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_key), MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        //store data :)
         editor.putString(getString(R.string.preference_user_name), user_name);
         editor.putString(getString(R.string.preference_user_password), user_password);
         editor.putBoolean(getString(R.string.preference_isLogged), true);
