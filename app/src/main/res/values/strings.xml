@@ -1,0 +1,24 @@
+<resources>
+    <!-- Strings for layouts use -->
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Iteso Store</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="section1">Technology</string>
+    <string name="section2">Home</string>
+    <string name="section3">Electronics</string>
+    <string name="activity_splash_screen_greet">WELCOME TO ITESO PRODUCTS</string>
+    <string name="activity_login_name_hint">Ingresa aquí tu nombre de usuario</string>
+    <string name="activity_login_password_hint">Ingresa aquí tu constraseña</string>
+    <string name="activity_login_log_button">Login</string>
+
+    <!-- Strings for in app use -->
+    <string name="preference_user_name">user-name</string>
+    <string name="preference_user_password">user-password</string>
+    <string name="preference_isLogged">user-isLogged</string>
+    <string name="menu_activity_main_privacy_policy_text">Privacy Policy</string>
+    <string name="menu_activity_main_logout_text">Logout</string>
+    <string name="preference_key">com.iteso.pdm18_scrollabletabs_key</string>
+
+</resources>
