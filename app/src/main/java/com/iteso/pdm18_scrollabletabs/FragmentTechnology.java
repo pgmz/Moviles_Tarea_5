@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 
 import com.iteso.pdm18_scrollabletabs.beans.ItemProduct;
 import com.iteso.pdm18_scrollabletabs.tools.Constant;
+import com.iteso.pdm18_scrollabletabs.tools.DatabaseHandler;
+import com.iteso.pdm18_scrollabletabs.tools.ItemProductControl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -53,6 +55,11 @@ public class FragmentTechnology extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
 
         products = new ArrayList<>();
+
+        DatabaseHandler databaseHandler = DatabaseHandler.getInstance(this.getContext());
+        ItemProductControl itemProductControl = new ItemProductControl();
+        ArrayList<ItemProduct> products = itemProductControl.getItemProductsByCategory(0, databaseHandler);
+
         products.add(new ItemProduct(1, "Mac", "BestBuy", "Zapopan", "3312345678", "Lorem Ipsum ....", Constant.TYPE_MAC));
         products.add(new ItemProduct(2, "Alienware", "DELL", "Zapopan", "3312345678", "Lorem Ipsum ....", Constant.TYPE_ALIENWARE));
         products.add(new ItemProduct(3, "Lanix", "Saint Jhonny", "Zapopan", "3312345678", "Lorem Ipsum ....", Constant.TYPE_ALIENWARE));

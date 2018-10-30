@@ -64,9 +64,9 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mTitle.setText(products.get(holder.getAdapterPosition()).getTitle());
-        holder.mStore.setText(products.get(holder.getAdapterPosition()).getStore());
-        holder.mLocation.setText(products.get(holder.getAdapterPosition()).getLocation());
-        holder.mPhone.setText(products.get(holder.getAdapterPosition()).getPhone());
+        holder.mStore.setText(products.get(holder.getAdapterPosition()).getStore().getName());
+        holder.mLocation.setText(products.get(holder.getAdapterPosition()).getLocation().getName());
+        holder.mPhone.setText(products.get(holder.getAdapterPosition()).getStore().getPhone());
 
         switch(products.get(holder.getAdapterPosition()).getImage()){
             case Constant.TYPE_MAC:
@@ -102,7 +102,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL,
-                        Uri.parse("tel:" + products.get(holder.getAdapterPosition()).getPhone()));
+                        Uri.parse("tel:" + products.get(holder.getAdapterPosition()).getStore().getPhone()));
                 context.startActivity(intent);
 
             }

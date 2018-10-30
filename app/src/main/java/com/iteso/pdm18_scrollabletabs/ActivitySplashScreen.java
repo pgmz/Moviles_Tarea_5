@@ -1,14 +1,17 @@
 package com.iteso.pdm18_scrollabletabs;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.iteso.pdm18_scrollabletabs.beans.City;
+import com.iteso.pdm18_scrollabletabs.beans.Store;
 import com.iteso.pdm18_scrollabletabs.beans.User;
+import com.iteso.pdm18_scrollabletabs.tools.DatabaseHandler;
+import com.iteso.pdm18_scrollabletabs.tools.StoreControl;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,6 +31,25 @@ public class ActivitySplashScreen extends AppCompatActivity {
             intent = new Intent(ActivitySplashScreen.this, ActivityLogin.class);
         }
 
+
+        DatabaseHandler databaseHandler = DatabaseHandler.getInstance(this);
+        StoreControl storeControl = new StoreControl();
+        ArrayList<Store> stores = storeControl.getStores(databaseHandler);
+
+        if(stores.size() == 0){
+            storeControl.addStore(new Store(
+                    1, "BestBuy", "01 800 237 8289", 0, 1.0, 2.0,
+                    new City(1, "Guadalajara")), databaseHandler);
+
+            storeControl.addStore(new Store(
+                    2, "ZaraHome", " 01 81 8378 0814", 1, 3.0, 4.0,
+                    new City(2, "Monterrey")), databaseHandler);
+
+            storeControl.addStore(new Store(
+                    3, "Steren", "01 55 5545 5947", 2, 5.0, 6.0,
+                    new City(3, "CDMX")), databaseHandler);
+        }
+
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
@@ -37,7 +59,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
         };
 
         Timer timer = new Timer();
-        timer.schedule(timerTask, 1300);
+        timer.schedule(timerTask, 200);
 
     }
 

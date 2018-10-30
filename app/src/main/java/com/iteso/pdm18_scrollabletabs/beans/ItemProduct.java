@@ -10,29 +10,52 @@ import android.os.Parcelable;
  * @version 1.0.1 Add Parcelable Interfaz and code parameter
  */
 
-public class ItemProduct implements Parcelable{
+public class ItemProduct implements Parcelable {
     private int code;
     private String title;
-    private String store;
-    private String location;
-    private String phone;
     private String description;
     private Integer image;
+    private Store store;
+    private Category category;
 
-    public String getLocation() {
-        return location;
+    public ItemProduct(int code, String title, String description, Integer image) {
+        this.code = code;
+        this.title = title;
+        this.description = description;
+        this.image = image;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public ItemProduct(int code, String title, String description, Integer image, Category category) {
+        this.code = code;
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.category = category;
     }
 
-    public String getPhone() {
-        return phone;
+    public ItemProduct(int code, String title, String description, Integer image, Store store, Category category) {
+        this.code = code;
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.store = store;
+        this.category = category;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -51,57 +74,22 @@ public class ItemProduct implements Parcelable{
         this.image = image;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    @Override
-    public String toString() {
-        return "ItemProduct{" +
-                "code=" + code +
-                ", title='" + title + '\'' +
-                ", store='" + store + '\'' +
-                ", location='" + location + '\'' +
-                ", phone='" + phone + '\'' +
-                ", description='" + description + '\'' +
-                ", image=" + image +
-                '}';
-    }
-
-    public ItemProduct(int code, String title, String store, String location, String phone, String description, Integer image) {
-        this.code = code;
-        this.title = title;
-        this.store = store;
-        this.location = location;
-        this.phone = phone;
-        this.description = description;
-        this.image = image;
-    }
-
-    public ItemProduct(String title, String store) {
-        this.title = title;
-        this.store = store;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getStore() {
+    public Store getStore() {
         return store;
     }
 
-    public void setStore(String store) {
+    public void setStore(Store store) {
         this.store = store;
     }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
 
     @Override
     public int describeContents() {
@@ -112,24 +100,25 @@ public class ItemProduct implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.code);
         dest.writeString(this.title);
-        dest.writeString(this.store);
-        dest.writeString(this.location);
-        dest.writeString(this.phone);
         dest.writeString(this.description);
         dest.writeValue(this.image);
+        dest.writeParcelable(this.store, flags);
+        dest.writeParcelable(this.category, flags);
     }
 
-    ItemProduct(Parcel in) {
+    public ItemProduct() {
+    }
+
+    protected ItemProduct(Parcel in) {
         this.code = in.readInt();
         this.title = in.readString();
-        this.store = in.readString();
-        this.location = in.readString();
-        this.phone = in.readString();
         this.description = in.readString();
         this.image = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.store = in.readParcelable(Store.class.getClassLoader());
+        this.category = in.readParcelable(Category.class.getClassLoader());
     }
 
-    public static final Creator<ItemProduct> CREATOR = new Creator<ItemProduct>() {
+    public static final Parcelable.Creator<ItemProduct> CREATOR = new Parcelable.Creator<ItemProduct>() {
         @Override
         public ItemProduct createFromParcel(Parcel source) {
             return new ItemProduct(source);
