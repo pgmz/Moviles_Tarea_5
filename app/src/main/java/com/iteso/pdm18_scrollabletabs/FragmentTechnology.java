@@ -7,14 +7,19 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.iteso.pdm18_scrollabletabs.beans.Category;
 import com.iteso.pdm18_scrollabletabs.beans.ItemProduct;
+import com.iteso.pdm18_scrollabletabs.beans.Store;
+import com.iteso.pdm18_scrollabletabs.tools.CategoryControl;
 import com.iteso.pdm18_scrollabletabs.tools.Constant;
 import com.iteso.pdm18_scrollabletabs.tools.DatabaseHandler;
 import com.iteso.pdm18_scrollabletabs.tools.ItemProductControl;
+import com.iteso.pdm18_scrollabletabs.tools.StoreControl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -54,20 +59,42 @@ public class FragmentTechnology extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        products = new ArrayList<>();
-
         DatabaseHandler databaseHandler = DatabaseHandler.getInstance(this.getContext());
         ItemProductControl itemProductControl = new ItemProductControl();
-        ArrayList<ItemProduct> products = itemProductControl.getItemProductsByCategory(0, databaseHandler);
 
-        products.add(new ItemProduct(1, "Mac", "BestBuy", "Zapopan", "3312345678", "Lorem Ipsum ....", Constant.TYPE_MAC));
-        products.add(new ItemProduct(2, "Alienware", "DELL", "Zapopan", "3312345678", "Lorem Ipsum ....", Constant.TYPE_ALIENWARE));
-        products.add(new ItemProduct(3, "Lanix", "Saint Jhonny", "Zapopan", "3312345678", "Lorem Ipsum ....", Constant.TYPE_ALIENWARE));
+        products = itemProductControl.getItemProductsByCategory(0, databaseHandler);
 
+        if (products.size() == 0) {
+            StoreControl storeControl = new StoreControl();
+            Store store = storeControl.getStoreById(1, databaseHandler);
+            Category category = new Category(0);
+
+            // int code, String title, String description, Integer image, Store store, Category category) {
+            itemProductControl.addItemProduct(
+                    new ItemProduct(1, "Mac", "Lorem Ipsum",
+                            Constant.TYPE_MAC,
+                            store,
+                            category),
+                    databaseHandler);
+            itemProductControl.addItemProduct(
+                    new ItemProduct(2, "Alienware", "Lorem Ipsum",
+                            Constant.TYPE_ALIENWARE,
+                            store,
+                            category),
+                    databaseHandler);
+            itemProductControl.addItemProduct(
+                    new ItemProduct(3, "Lanix", "Lorem Ipsum",
+                            Constant.TYPE_ALIENWARE,
+                            store,
+                            category),
+                    databaseHandler);
+            products = itemProductControl.getItemProductsByCategory(0, databaseHandler);
+        }
 
         adapterProduct = new AdapterProduct(Constant.FRAGMENT_TECHNOLOGY, getActivity(), products);
         recyclerView.setAdapter(adapterProduct);
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -75,9 +102,9 @@ public class FragmentTechnology extends Fragment {
         ItemProduct itemProduct = data.getParcelableExtra(Constant.EXTRA_PRODUCT);
         Iterator<ItemProduct> iterator = products.iterator();
         int position = 0;
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             ItemProduct item = iterator.next();
-            if(item.getCode() == itemProduct.getCode()){
+            if (item.getCode() == itemProduct.getCode()) {
                 products.set(position, itemProduct);
                 break;
             }
@@ -86,4 +113,5 @@ public class FragmentTechnology extends Fragment {
         adapterProduct.notifyDataSetChanged();
 
     }
+
 }

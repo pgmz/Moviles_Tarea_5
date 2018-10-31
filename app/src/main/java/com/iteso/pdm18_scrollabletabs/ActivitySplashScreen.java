@@ -25,7 +25,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
         final Intent intent;
 
         //If there is a user logged, continue to main activity
-        if(getLoggedUserFromPreferences().isLogged()){
+        if (getLoggedUserFromPreferences().isLogged()) {
             intent = new Intent(ActivitySplashScreen.this, ActivityMain.class);
         } else {    // If there isn´t a user logged, continue to login activity
             intent = new Intent(ActivitySplashScreen.this, ActivityLogin.class);
@@ -36,7 +36,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
         StoreControl storeControl = new StoreControl();
         ArrayList<Store> stores = storeControl.getStores(databaseHandler);
 
-        if(stores.size() == 0){
+        if (stores.size() == 0) {
             storeControl.addStore(new Store(
                     1, "BestBuy", "01 800 237 8289", 0, 1.0, 2.0,
                     new City(1, "Guadalajara")), databaseHandler);
@@ -47,23 +47,14 @@ public class ActivitySplashScreen extends AppCompatActivity {
 
             storeControl.addStore(new Store(
                     3, "Steren", "01 55 5545 5947", 2, 5.0, 6.0,
-                    new City(3, "CDMX")), databaseHandler);
+                    new City(3, "Ciudad de México")), databaseHandler);
         }
 
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                startActivity(intent);
-                finish();
-            }
-        };
-
-        Timer timer = new Timer();
-        timer.schedule(timerTask, 200);
-
+        startActivity(intent);
+        finish();
     }
 
-    private User getLoggedUserFromPreferences(){
+    private User getLoggedUserFromPreferences() {
         //user data that will be returned
         User user = new User();
 

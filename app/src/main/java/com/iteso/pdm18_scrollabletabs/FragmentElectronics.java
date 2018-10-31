@@ -11,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.iteso.pdm18_scrollabletabs.beans.Category;
 import com.iteso.pdm18_scrollabletabs.beans.ItemProduct;
+import com.iteso.pdm18_scrollabletabs.beans.Store;
 import com.iteso.pdm18_scrollabletabs.tools.Constant;
 import com.iteso.pdm18_scrollabletabs.tools.DatabaseHandler;
 import com.iteso.pdm18_scrollabletabs.tools.ItemProductControl;
+import com.iteso.pdm18_scrollabletabs.tools.StoreControl;
 
 import java.util.ArrayList;
 
@@ -55,11 +58,31 @@ public class FragmentElectronics extends Fragment {
         ItemProductControl itemProductControl = new ItemProductControl();
         ArrayList<ItemProduct> products = itemProductControl.getItemProductsByCategory(2, databaseHandler);
 
-        products.add(new ItemProduct(6, "Refrigerador", "BestBuy", "Zapopan", "3312345678", "Lorem Ipsum ....", Constant.TYPE_REFRIGERATOR));
-        products.add(new ItemProduct(7, "Micro", "Palacio de Hierro", "Zapopan", "3312345678", "Lorem Ipsum ....", Constant.TYPE_MICRO));
+        if (products.size() == 0) {
+            StoreControl storeControl = new StoreControl();
+            Store store = storeControl.getStoreById(3, databaseHandler);
+            Category category = new Category(2);
+
+            itemProductControl.addItemProduct(
+                    new ItemProduct(6, "Refrigerador", "Lorem Ipsum",
+                            Constant.TYPE_REFRIGERATOR,
+                            store,
+                            category),
+                    databaseHandler);
+            itemProductControl.addItemProduct(
+                    new ItemProduct(7, "Micro", "Lorem Ipsum",
+                            Constant.TYPE_MICRO,
+                            store,
+                            category),
+                    databaseHandler);
+
+        }
+
+        products = itemProductControl.getItemProductsByCategory(2, databaseHandler);
 
         AdapterProduct adapterProduct = new AdapterProduct(Constant.FRAGMENT_ELECTRONICS, getActivity(), products);
         recyclerView.setAdapter(adapterProduct);
+
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

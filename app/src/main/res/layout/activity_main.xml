@@ -45,6 +45,7 @@
         android:layout_marginLeft="@dimen/activity_main_fab_margin"
         android:src="@android:drawable/ic_input_add"
         android:layout_width="@dimen/activity_main_fab_size"
+        android:layout_margin="16dp"
         android:layout_height="@dimen/activity_main_fab_size" />
 
     <android.support.v4.view.ViewPager

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/activity_item_layout_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:context=".ActivityItem">
+
+    <Spinner
+        android:id="@+id/activity_item_spinner_images"
+        android:entries="@array/activity_item_spinner_images"
+        android:layout_marginBottom="@dimen/activity_item_layout_margin"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+    </Spinner>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginBottom="@dimen/activity_item_layout_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/activity_item_edittext"
+            android:hint="@string/activity_item_editext_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/activity_item_spinner_category"
+        android:layout_marginBottom="@dimen/activity_item_layout_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
+
+    <Spinner
+        android:id="@+id/activity_item_spinner_stores"
+        android:layout_marginBottom="@dimen/activity_item_layout_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
+
+    <Button
+        android:id="@+id/activity_item_button_save"
+        android:text="@string/activity_item_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

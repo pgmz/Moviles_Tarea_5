@@ -10,17 +10,24 @@ import java.util.ArrayList;
 
 public class ItemProductControl {
 
-    public static final String KEY_STORE_PRODUCT_ID = "id";
-    public static final String KEY_STORE_PRODUCT_ID_PRODUCT = "idProduct";
-    public static final String KEY_STORE_PRODUCT_ID_STORE = "idStore";
-
     public void addItemProduct(ItemProduct itemProduct, DatabaseHandler databaseHandler){
+
+        if(itemProduct.getCode() == -1){
+            SQLiteDatabase sqLiteDatabase = databaseHandler.getReadableDatabase();
+            String GET_TOTAL = "SELECT MAX(" +
+                    DatabaseHandler.KEY_PRODUCT_ID_PRODUCT + ") FROM " + DatabaseHandler.TABLE_PRODUCT;
+            Cursor cursor = sqLiteDatabase.rawQuery(GET_TOTAL, null);
+            if(cursor.moveToFirst()) {
+                itemProduct.setCode(cursor.getInt(0));
+            }
+        }
+
         String INSERT_PRODUCT = "INSERT INTO " + DatabaseHandler.TABLE_PRODUCT + "(" +
                 DatabaseHandler.KEY_PRODUCT_ID_PRODUCT + "," + DatabaseHandler.KEY_PRODUCT_TITLE + "," +
                 DatabaseHandler.KEY_PRODUCT_DESCRIPTION + "," + DatabaseHandler.KEY_PRODUCT_IMAGE + "," +
                 DatabaseHandler.KEY_PRODUCT_ID_CATEGORY + ") VALUES (" +
-                itemProduct.getCode() + "," + itemProduct.getTitle() + "," +
-                itemProduct.getDescription() + "," + itemProduct.getImage() + "," +
+                itemProduct.getCode() + ",'" + itemProduct.getTitle() + "','" +
+                itemProduct.getDescription() + "'," + itemProduct.getImage() + "," +
                 itemProduct.getCategory().getId() + ")";
 
         SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
@@ -28,10 +35,9 @@ public class ItemProductControl {
 
         String INSERT_STORE_PRODUCT = "INSERT INTO " + DatabaseHandler.TABLE_STORE_PRODUCT + "(" +
                 DatabaseHandler.KEY_STORE_PRODUCT_ID_PRODUCT + "," + DatabaseHandler.KEY_STORE_PRODUCT_ID_STORE +
-                ") VALUES (" + itemProduct.getCode() + "," + itemProduct.getCategory().getId() + ")";
+                ") VALUES (" + itemProduct.getCode() + "," + itemProduct.getStore().getId() + ")";
 
         sqLiteDatabase.execSQL(INSERT_STORE_PRODUCT);
-
 
     }
 
@@ -55,13 +61,13 @@ public class ItemProductControl {
         if(cursor.moveToFirst()){
             do{
                 itemProducts.add(new ItemProduct(
-                        cursor.getInt(1),
+                        cursor.getInt(0),
+                        cursor.getString(1),
                         cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getInt(4),
+                        cursor.getInt(3),
                         new Category(
                                 idCategory,
-                                cursor.getString(5)
+                                cursor.getString(4)
                         )
                 ));
             }while(cursor.moveToNext());

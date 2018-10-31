@@ -13,6 +13,10 @@ public class Store implements Parcelable {
     private double longitude;
     private City city;
 
+    public Store(int id){
+        this.id = id;
+    }
+
     public Store(int id, String name, String phone, int thumbnail, double latitude, double longitude, City city) {
         this.id = id;
         this.name = name;

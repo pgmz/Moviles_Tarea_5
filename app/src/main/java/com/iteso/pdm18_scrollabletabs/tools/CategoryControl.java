@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class CategoryControl {
 
-    ArrayList<Category> getCategories(DatabaseHandler databaseHandler){
+    public ArrayList<Category> getCategories(DatabaseHandler databaseHandler){
 
         ArrayList<Category> categories = new ArrayList<>();
 

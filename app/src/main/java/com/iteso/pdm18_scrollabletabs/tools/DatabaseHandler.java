@@ -61,7 +61,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String CREATE_TABLE_CITY = "CREATE TABLE "+ TABLE_CITY + "(" + KEY_CITY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_CITY_NAME + " TEXT)";
+        String CREATE_TABLE_CITY = "CREATE TABLE "+ TABLE_CITY + "(" + KEY_CITY_ID + " INTEGER PRIMARY KEY," + KEY_CITY_NAME + " TEXT)";
         String CREATE_TABLE_CATEGORY = "CREATE TABLE "+ TABLE_CATEGORY + "(" + KEY_CATEGORY_ID + " INTEGER PRIMARY KEY," + KEY_CATEGORY_NAME + " TEXT)";
         String CREATE_TABLE_STORE = "CREATE TABLE "+ TABLE_STORE + "(" + KEY_STORE_ID + " INTEGER PRIMARY KEY,"
                 + KEY_STORE_NAME + " TEXT," + KEY_STORE_PHONE + " TEXT," + KEY_STORE_ID_CITY + " INTEGER," + KEY_STORE_THUMBNAIL + " INTEGER,"
@@ -81,9 +81,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(CREATE_TABLE_PRODUCT);
         sqLiteDatabase.execSQL(CREATE_TABLE_STORE_PRODUCT);
 
-        String ADD_CATEGORY_TECHNOLOGY = "INSERT INTO " + TABLE_CATEGORY + "(" + KEY_CATEGORY_NAME + ") VALUES ('Technology')";
-        String ADD_CATEGORY_HOME = "INSERT INTO " + TABLE_CATEGORY + "(" + KEY_CATEGORY_NAME + ") VALUES ('Home')";
-        String ADD_CATEGORY_ELECTRONICS = "INSERT INTO " + TABLE_CATEGORY + "(" + KEY_CATEGORY_NAME + ") VALUES ('Electronics')";
+        String ADD_CATEGORY_TECHNOLOGY = "INSERT INTO " + TABLE_CATEGORY + "(" + KEY_CATEGORY_ID + "," + KEY_CATEGORY_NAME + ") VALUES (0, 'Technology')";
+        String ADD_CATEGORY_HOME = "INSERT INTO " + TABLE_CATEGORY + "(" + KEY_CATEGORY_ID + "," + KEY_CATEGORY_NAME + ") VALUES (1, 'Home')";
+        String ADD_CATEGORY_ELECTRONICS = "INSERT INTO " + TABLE_CATEGORY + "(" + KEY_CATEGORY_ID + "," + KEY_CATEGORY_NAME + ") VALUES (2, 'Electronics')";
 
         sqLiteDatabase.execSQL(ADD_CATEGORY_TECHNOLOGY);
         sqLiteDatabase.execSQL(ADD_CATEGORY_HOME);

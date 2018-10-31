@@ -11,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.iteso.pdm18_scrollabletabs.beans.Category;
 import com.iteso.pdm18_scrollabletabs.beans.ItemProduct;
+import com.iteso.pdm18_scrollabletabs.beans.Store;
 import com.iteso.pdm18_scrollabletabs.tools.Constant;
 import com.iteso.pdm18_scrollabletabs.tools.DatabaseHandler;
 import com.iteso.pdm18_scrollabletabs.tools.ItemProductControl;
+import com.iteso.pdm18_scrollabletabs.tools.StoreControl;
 
 import java.util.ArrayList;
 
@@ -55,12 +58,32 @@ public class FragmentHome extends Fragment {
         ItemProductControl itemProductControl = new ItemProductControl();
         ArrayList<ItemProduct> products = itemProductControl.getItemProductsByCategory(1, databaseHandler);
 
-        products.add(new ItemProduct(4, "Sabanas", "Zara Home", "Zapopan", "3312345678", "Lorem Ipsum ....", Constant.TYPE_SHEETS));
-        products.add(new ItemProduct(5, "Almohadas", "Zara Home", "Zapopan", "3312345678", "Lorem Ipsum ....", Constant.TYPE_PILLOW));
+        if (products.size() == 0) {
+            StoreControl storeControl = new StoreControl();
+            Store store = storeControl.getStoreById(2, databaseHandler);
+            Category category = new Category(1);
+
+            itemProductControl.addItemProduct(
+                    new ItemProduct(5, "Almohadas", "Lorem Ipsum",
+                            Constant.TYPE_PILLOW,
+                            store,
+                            category),
+                    databaseHandler);
+            itemProductControl.addItemProduct(
+                    new ItemProduct(4, "Sabanas", "Lorem Ipsum",
+                            Constant.TYPE_SHEETS,
+                            store,
+                            category),
+                    databaseHandler);
+
+        }
+
+        products = itemProductControl.getItemProductsByCategory(1, databaseHandler);
 
         AdapterProduct adapterProduct = new AdapterProduct(Constant.FRAGMENT_HOME, getActivity(), products);
         recyclerView.setAdapter(adapterProduct);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

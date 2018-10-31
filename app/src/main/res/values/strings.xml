@@ -12,7 +12,14 @@
     <string name="activity_login_name_hint">Ingresa aquí tu nombre de usuario</string>
     <string name="activity_login_password_hint">Ingresa aquí tu constraseña</string>
     <string name="activity_login_log_button">Login</string>
-
+    <string-array name="activity_item_spinner_images">
+        <item>MAC</item>
+        <item>ALIENWARE</item>
+        <item>SHEETS</item>
+        <item>PILLOW</item>>
+        <item>REFRIGERATOR</item>
+        <item>MICRO</item>
+    </string-array>
     <!-- Strings for in app use -->
     <string name="preference_user_name">user-name</string>
     <string name="preference_user_password">user-password</string>
@@ -20,5 +27,7 @@
     <string name="menu_activity_main_privacy_policy_text">Privacy Policy</string>
     <string name="menu_activity_main_logout_text">Logout</string>
     <string name="preference_key">com.iteso.pdm18_scrollabletabs_key</string>
+    <string name="activity_item_editext_hint">Ingresa el nombre del producto</string>
+    <string name="activity_item_button">Guardar</string>
 
 </resources>
