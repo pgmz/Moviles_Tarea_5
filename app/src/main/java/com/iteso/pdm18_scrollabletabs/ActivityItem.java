@@ -2,6 +2,7 @@ package com.iteso.pdm18_scrollabletabs;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -76,10 +77,9 @@ public class ActivityItem extends AppCompatActivity {
                         editText.getText().toString(),
                         "Lorem ipsum",
                         spinner_image.getSelectedItemPosition(),
-                        new Store(stores.get(spinner_store.getSelectedItemPosition()).getId()),
-                        new Category(categories.get(spinner_category.getSelectedItemPosition()).getId())
+                        stores.get(spinner_store.getSelectedItemPosition()),
+                        categories.get(spinner_category.getSelectedItemPosition())
                 );
-
                 itemProductControl.addItemProduct(itemProduct, databaseHandler);
                 finish();
 

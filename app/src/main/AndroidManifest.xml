@@ -3,6 +3,8 @@
     package="com.iteso.pdm18_scrollabletabs">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>
+    <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY"/>
 
     <application
         android:allowBackup="true"
@@ -26,6 +28,14 @@
         <activity android:name=".ActivityLogin" />
         <activity android:name=".ActivityPrivacyPolicy" />
         <activity android:name=".ActivityItem"></activity>
+
+        <provider android:name="com.iteso.pdm18_scrollabletabs.tools.ItemProductsContentProvider"
+            android:authorities="com.iteso.pdm18_scrollabletabs.tools.ItemProductsContentProvider"
+            android:exported="true"
+            android:enabled="true"
+            android:multiprocess="true"
+            />
+
     </application>
 
 </manifest>

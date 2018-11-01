@@ -85,6 +85,7 @@ public class ItemProductControl {
             if(cursor.moveToFirst()) {
                 itemProduct.setStore(storeControl.getStoreById(cursor.getInt(0), databaseHandler));
             }
+            cursor.close();
         }
 
         return itemProducts;
