@@ -43,28 +43,18 @@ public class ActivityItem extends AppCompatActivity {
         CategoryControl categoryControl = new CategoryControl();
 
         final ArrayList<Category> categories = categoryControl.getCategories(databaseHandler);
-        ArrayList<String> categoryNames = new ArrayList<>();
 
-        for (Category category : categories){
-            categoryNames.add(category.getName());
-        }
-
-        spinner_category.setAdapter(new ArrayAdapter<String>(this,
+        spinner_category.setAdapter(new ArrayAdapter<Category>(this,
                 android.R.layout.simple_spinner_dropdown_item,
-                categoryNames));
+                categories));
 
         StoreControl storeControl = new StoreControl();
 
         final ArrayList<Store> stores = storeControl.getStores(databaseHandler);
-        ArrayList<String> storeNames = new ArrayList<>();
 
-        for (Store store : stores){
-            storeNames.add(store.getName());
-        }
-
-        spinner_store.setAdapter(new ArrayAdapter<String>(this,
+        spinner_store.setAdapter(new ArrayAdapter<Store>(this,
                 android.R.layout.simple_spinner_dropdown_item,
-                storeNames));
+                stores));
 
         final ItemProductControl itemProductControl = new ItemProductControl();
         button_save = findViewById(R.id.activity_item_button_save);
@@ -77,8 +67,8 @@ public class ActivityItem extends AppCompatActivity {
                         editText.getText().toString(),
                         "Lorem ipsum",
                         spinner_image.getSelectedItemPosition(),
-                        stores.get(spinner_store.getSelectedItemPosition()),
-                        categories.get(spinner_category.getSelectedItemPosition())
+                        (Store)spinner_store.getSelectedItem(),
+                        (Category)spinner_category.getSelectedItem()
                 );
                 itemProductControl.addItemProduct(itemProduct, databaseHandler);
                 finish();

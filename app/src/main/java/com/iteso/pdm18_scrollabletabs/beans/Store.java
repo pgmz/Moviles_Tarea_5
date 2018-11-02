@@ -112,6 +112,11 @@ public class Store implements Parcelable {
         this.city = in.readParcelable(City.class.getClassLoader());
     }
 
+    @Override
+    public String toString(){
+        return this.getName();
+    }
+
     public static final Parcelable.Creator<Store> CREATOR = new Parcelable.Creator<Store>() {
         @Override
         public Store createFromParcel(Parcel source) {

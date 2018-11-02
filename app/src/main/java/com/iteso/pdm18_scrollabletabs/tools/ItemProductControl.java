@@ -2,6 +2,7 @@ package com.iteso.pdm18_scrollabletabs.tools;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.iteso.pdm18_scrollabletabs.beans.Category;
 import com.iteso.pdm18_scrollabletabs.beans.ItemProduct;
@@ -18,7 +19,7 @@ public class ItemProductControl {
                     DatabaseHandler.KEY_PRODUCT_ID_PRODUCT + ") FROM " + DatabaseHandler.TABLE_PRODUCT;
             Cursor cursor = sqLiteDatabase.rawQuery(GET_TOTAL, null);
             if(cursor.moveToFirst()) {
-                itemProduct.setCode(cursor.getInt(0));
+                itemProduct.setCode(cursor.getInt(0)+1);
             }
         }
 

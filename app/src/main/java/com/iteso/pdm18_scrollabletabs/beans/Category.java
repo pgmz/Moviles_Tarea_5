@@ -53,6 +53,11 @@ public class Category implements Parcelable {
         this.name = in.readString();
     }
 
+    @Override
+    public String toString(){
+        return this.getName();
+    }
+
     public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
         @Override
         public Category createFromParcel(Parcel source) {
